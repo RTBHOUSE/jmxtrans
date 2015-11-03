@@ -22,6 +22,7 @@
  */
 package com.googlecode.jmxtrans;
 
+import ch.qos.logback.classic.Level;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Guice;
@@ -72,6 +73,11 @@ import static com.google.common.base.MoreObjects.firstNonNull;
  * @author jon
  */
 public class JmxTransformer implements WatchedCallback {
+
+	static {
+		// people on Github are working on logging configuration issues. For now, here is a nasty hack :)
+		((ch.qos.logback.classic.LoggerContext) LoggerFactory.getILoggerFactory()).getLogger("ROOT").setLevel(Level.WARN);
+	}
 
 	private static final Logger log = LoggerFactory.getLogger(JmxTransformer.class);
 
